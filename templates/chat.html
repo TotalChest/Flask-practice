@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+Chat
+{% endblock %}
+
+{% block body %}
+<h1>Messages</h1>
+{% for message in messages %}
+    <h4>{{message}}</h4>
+{% endfor %}
+{% endblock %}
