@@ -2,7 +2,7 @@
 
 Это небольшой проект написан с целью изучения веб-фреймворка Flask.
 
-Запуск:
+### Запуск:
 ```bash
 git clone https://github.com/totalchest/flask-practice.git
 cd flask-practice
