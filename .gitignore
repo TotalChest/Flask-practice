@@ -1,0 +1,4 @@
+.flask-app
+.vscode
+website/__pycache__
+*.pyc
