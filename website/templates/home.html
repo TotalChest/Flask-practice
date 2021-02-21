@@ -6,20 +6,33 @@
 
 {% block content %}
 <h1 align="center">Заметки</h1>
-
-<ul class="list-group list-group-flush">
-    {% for note in user.notes %}
-        <li class="list-group-item">
-            <button type="button" class="btn-close" aria-label="Close" onclick="deleteNote({{ note.id }})"></button>
-            {{note.data}}   
-        </li>
-    {% endfor %}
-</ul>
-<br/>
-<form method="POST">
-    <div class="input-group mb-3">
-        <input required type="text" name="note" class="form-control" placeholder="Enter note" aria-describedby="button-addon2">
-        <button class="btn btn-primary" type="submit" id="button-addon2" name="submit">Add Note</button>
+{% if user.is_authenticated %}
+    <ul class="list-group list-group-flush">
+        {% for note in user.notes %}
+            <li class="list-group-item d-flex align-items-center">
+                <span class="badge rounded-pill bg-secondary py-1 px-3">{{note.date.strftime("%d/%m/%Y")}}</span>
+                <span class="px-4">{{note.data}}</span>
+                <button type="button" class="btn-close ms-auto" aria-label="Close" onclick="deleteNote({{ note.id }})"></button> 
+            </li>
+        {% endfor %}
+    </ul>
+    <br/>
+    <form method="POST">
+        <div class="input-group mb-3">
+            <input required type="text" name="note" class="form-control" placeholder="Введите заметку" aria-describedby="button-addon2">
+            <button class="btn btn-primary" type="submit" id="button-addon2" name="submit">Добавить заметку</button>
+        </div>
+    </form>
+{% else %}
+    <div class="alert alert-secondary" role="alert">
+        Это небольшой проект написан с целью изучения веб-фреймворка Flask. После входа на сайт тебе будет доступна следующая форма для написания и сохранения заметок. Исходный код проекта можно найти в <a href="https://github.com/totalchest">гитхаб</a> аккаунте.
     </div>
-</form>
+
+    <form method="POST">
+        <div class="input-group mb-3">
+            <input disabled required type="text" name="note" class="form-control" placeholder="Введите заметку" aria-describedby="button-addon2">
+            <button disabled class="btn btn-primary" type="submit" id="button-addon2" name="submit">Добавить заметку</button>
+        </div>
+    </form>
+{% endif %}
 {% endblock %}
